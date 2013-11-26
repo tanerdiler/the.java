@@ -42,4 +42,8 @@ public class Events
         }
         return event;
     }
+    
+    public static final void reset () {
+        events.clear();
+    }
 }

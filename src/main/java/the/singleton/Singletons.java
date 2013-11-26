@@ -1,4 +1,4 @@
-package the.utils;
+package the.singleton;
 
 import static com.google.common.collect.Maps.newHashMap;
 import static the.helper.Helper.isNull;
