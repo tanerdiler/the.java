@@ -21,13 +21,15 @@ public class Event
         return this;
     }
     
-    public void fire (EventSource source) {
-        mainPath.execute(source, type.methodName);
+    public EventSource fire (EventSource source) {
+        mainPath.execute(source, type.getMethodName());
+        return source;
     }
     
-    public void fire (Parameter ... parameters) {
+    public EventSource fire (Parameter ... parameters) {
         EventSource source = EventSource.aNew(type, parameters);
         fire(source);
+        return source;
     }
 
     public static Event aNew(EventType eventType)

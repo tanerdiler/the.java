@@ -5,14 +5,14 @@ import static java.lang.String.format;
 
 import java.util.List;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class EventPath implements EventPathNode
 {
     private static final String STOPPING_ON_TRIGGERING_METHODS = "Stopping triggering rest of listeners for %s. Reason : {%s}";
     
-    private static final Logger logger = LoggerFactory.getLogger(Event.class);
+    private static final Logger logger = LogManager.getLogger(Event.class);
     
     private List<EventPathNode> listeners = newArrayList();
     

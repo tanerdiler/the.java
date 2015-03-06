@@ -2,13 +2,13 @@ package the.helper;
 
 import java.util.Collection;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class Helper
 {
 	private static final Logger logger =
-	        LoggerFactory.getLogger(Helper.class);
+	        LogManager.getLogger(Helper.class);
 	
     public static <T> T with(T value)
     {

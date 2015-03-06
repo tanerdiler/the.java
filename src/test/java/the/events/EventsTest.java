@@ -34,7 +34,7 @@ public class EventsTest
     
     @Test
     public void checkListenerTriggered () {
-        Events.event(EventType.VISITORLOGON).add(new TestListener()).fire(Parameter.by("name", "tanerdiler"));
+        Events.event(TestEventType.VISITORLOGON).add(new TestListener()).fire(Parameter.by("name", "tanerdiler"));
         Assert.assertEquals(1, counter.get());
         Assert.assertEquals(1, paramCounter.get());
     }
@@ -43,7 +43,7 @@ public class EventsTest
     public void triggerListenersOnMainPath () {
         final AtomicInteger counter = new AtomicInteger(0);
         
-        Events.event(EventType.VISITORLOGON)
+        Events.event(TestEventType.VISITORLOGON)
         .add(new EventListener()
         {
             public void onVisitorLogon(EventSource source)
@@ -65,7 +65,7 @@ public class EventsTest
     public void triggerSubPathListenersToo () {
         final AtomicInteger counter = new AtomicInteger(0);
         
-        Events.event(EventType.VISITORLOGON).add(new EventListener()
+        Events.event(TestEventType.VISITORLOGON).add(new EventListener()
         {
             public void onVisitorLogon(EventSource source)
             {
@@ -98,7 +98,7 @@ public class EventsTest
     public void dontEffectMainPathExecutionWhenTriggerBreakerThrownBySubPathNode () {
         final AtomicInteger counter = new AtomicInteger(0);
         
-        Events.event(EventType.VISITORLOGON).add(new EventListener()
+        Events.event(TestEventType.VISITORLOGON).add(new EventListener()
         {
             public void onVisitorLogon(EventSource source)
             {
@@ -131,7 +131,7 @@ public class EventsTest
     public void keepContinueOnMainPathWhenTriggerBreakerThrownByMainPathNode () {
         final AtomicInteger counter = new AtomicInteger(0);
         
-        Events.event(EventType.VISITORLOGON).add(new EventListener()
+        Events.event(TestEventType.VISITORLOGON).add(new EventListener()
         {
             public void onVisitorLogon(EventSource source)
             {
@@ -163,7 +163,7 @@ public class EventsTest
     @Test(expected = RuntimeException.class)  
     public void breakTheEventTriggeringAfterRuntimeExceptionThrown () {
         final AtomicInteger counter = new AtomicInteger(0);
-        Events.event(EventType.VISITORLOGON).add(new EventListener()
+        Events.event(TestEventType.VISITORLOGON).add(new EventListener()
         {
             public void onVisitorLogon(EventSource source)
             {
