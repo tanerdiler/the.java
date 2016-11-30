@@ -46,7 +46,7 @@ public class Helper
     {
         return isNull(collection) || collection.isEmpty();
     }
-    
+
     public static StringHelper str (String str) {
     	return new StringHelper(str);
     }

@@ -1,39 +1,41 @@
 package the.events;
 
-public class Event
-{
+public class Event {
     public static boolean LOG_EVENTBRAKER = false;
-    
-    public final EventType type;
-    
-    private EventPath mainPath = EventPath.mainPath();
 
-    private Event (EventType event) {
-        this.type = event;
+    private EventPath eventPath = EventPath.mainPath();
+
+    private EventInfo eventInfo;
+
+    private final EventType eventType;
+
+    private Event(EventType eventType) {
+        this.eventType = eventType;
+        this.eventInfo = EventInfo.aNew();
     }
 
-    public Event add (EventListener listener) {
-        mainPath.add(listener);
+    public Event add(EventListener listener) {
+        eventPath.add(listener);
         return this;
     }
-    public Event add (EventPath subPath) {
-        mainPath.add(subPath);
+
+    public Event add(EventPath subPath) {
+        eventPath.add(subPath);
         return this;
     }
-    
-    public EventSource fire (EventSource source) {
-        mainPath.execute(source, type.getMethodName());
-        return source;
-    }
-    
-    public EventSource fire (Parameter ... parameters) {
-        EventSource source = EventSource.aNew(type, parameters);
-        fire(source);
-        return source;
+
+    public EventInfo fire(Parameter... parameters) {
+        eventInfo = EventInfo.aNew(parameters);
+        eventPath.onEvent(eventInfo);
+        return eventInfo;
     }
 
-    public static Event aNew(EventType eventType)
-    {
+
+    public static Event aNew(EventType eventType) {
         return new Event(eventType);
+    }
+
+    protected EventType getEventType() {
+        return eventType;
     }
 }

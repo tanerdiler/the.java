@@ -8,23 +8,19 @@ import java.util.Collection;
 import java.util.Map;
 
 
-public class EventSource implements Serializable
+public class EventInfo implements Serializable
 {
     private static final long serialVersionUID = 1L;
 
     private final Map<String, Parameter> params = newHashMap();
 
-    private final EventType type;
-    
-    private EventSource (EventType type, Parameter ... parameters) {
-        this.type = type;
+    private EventInfo(Parameter ... parameters) {
         for (Parameter param :  parameters) {
             params.put(param.name, param);
         }
     }
-    
-    private EventSource (EventType type, Collection<Parameter> parameters) {
-        this.type = type;
+
+    private EventInfo(Collection<Parameter> parameters) {
         for (Parameter param :  parameters) {
             params.put(param.name, param);
         }
@@ -38,27 +34,19 @@ public class EventSource implements Serializable
         }
         return null;
     }
-    
-    public EventType eventType () {
-        return type;
-    }
-    
-    public String eventName () {
-        return type.name();
-    }
-    
-    public static final EventSource aNew(EventType type, Parameter ... parameters)
+
+    public static final EventInfo aNew( Parameter ... parameters)
     {
-        return new EventSource(type, parameters);
+        return new EventInfo(parameters);
     }
-    
-    public EventSource clone () {
+
+    public EventInfo clone () {
         Map<String, Parameter> newParams = newHashMap(params);
-        EventSource newEventSource = new EventSource(type, newParams.values());
+        EventInfo newEventSource = new EventInfo(newParams.values());
         return newEventSource;
     }
     
-    public EventSource add (Parameter parameter) {
+    public EventInfo add (Parameter parameter) {
         params.put(parameter.name, parameter);
         return this;
     }
