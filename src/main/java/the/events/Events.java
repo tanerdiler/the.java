@@ -1,6 +1,7 @@
 package the.events;
 
 import static com.google.common.collect.Maps.newHashMap;
+import static the.helper.Helper.isSet;
 
 import java.util.Map;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
@@ -28,7 +29,7 @@ public class Events
     private static final void put (Event event) {
         writeLock.lock();
         try {
-        events.put(event.type, event);
+        events.put(event.getEventType(), event);
         } finally {
             writeLock.unlock();
         }
@@ -42,7 +43,7 @@ public class Events
         }
         return event;
     }
-    
+
     public static final void reset () {
         events.clear();
     }

@@ -6,8 +6,8 @@ public class Parameter implements Serializable
 {
     private static final long serialVersionUID = 1L;
     
-    public final String name;
-    public final Object value;
+    protected final String name;
+    protected final Object value;
 
     private Parameter(String name, Object value)
     {
@@ -19,4 +19,13 @@ public class Parameter implements Serializable
     {
         return new Parameter(name, value);
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public Object getValue() {
+        return value;
+    }
+
 }

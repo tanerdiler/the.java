@@ -1,7 +1,8 @@
 package the.events;
 
-public interface EventPathNode
-{
-    public void execute (EventSource source, String methodName);
+import java.io.Serializable;
+
+interface EventPathNode extends Serializable {
+    void onEvent(EventInfo source);
 }
 
